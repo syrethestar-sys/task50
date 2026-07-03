@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>📸 SnapBooth — Design Spec Sheet</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="photobooth-spec.css" />
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════
+     PAGE HEADER
+════════════════════════════════════════ -->
+<header class="page-header">
+  <div>
+    <h1>📸 <span>SnapBooth</span> — Design Spec Sheet</h1>
+    <p>A static redline spec for the photo-booth webcam app. Read the numbers, build one component at a time.</p>
+  </div>
+  <div class="badge-row">
+    <span class="badge coral">Static Spec Only</span>
+    <span class="badge mint">No JS · No Interactivity</span>
+    <span class="badge">Manrope Font</span>
+  </div>
+</header>
+
+
+<!-- ═══════════════════════════════════════
+     SECTION 1 — ANNOTATED MOCKUP
+════════════════════════════════════════ -->
+<section class="section">
+
+  <div class="mockup-wrap">
+
+    <!-- MOCKUP FRAME -->
+    <div class="mockup-frame">
+
+      <div class="chip amber chip-frame-padding">padding: 24px</div>
+      <div class="chip amber chip-frame-width">width: 380px</div>
+
+      <!-- App Header -->
+      <div class="app-header ann">
+        <div class="app-logo">Snap<span>Booth</span></div>
+        <div class="app-header-icons">
+          <div class="icon-btn">🔄</div>
+          <div class="icon-btn">⚙️</div>
+        </div>
+        <div class="chip mint chip-header-font">font: 18px / 800</div>
+        <div class="chip mint chip-header-icon">icon: 32×32px</div>
+      </div>
+
+      <div class="spacer-28"></div>
+
+      <!-- Camera Preview -->
+      <div class="camera-preview ann">
+        <div class="corner tl"></div>
+        <div class="corner tr"></div>
+        <div class="corner bl"></div>
+        <div class="corner br"></div>
+        <div class="camera-preview-inner">
+          <div class="camera-icon">📷</div>
+          <div class="camera-label">LIVE CAMERA PREVIEW</div>
+        </div>
+        <div class="chip chip-preview-radius">border-radius: 16px</div>
+        <div class="chip amber chip-preview-ratio">aspect-ratio: 4/3</div>
+      </div>
+
+      <!-- Filter Row -->
+      <div class="filter-label-row ann">
+        <span>FILTERS</span>
+        <a>See all →</a>
+        <div class="chip lav chip-filter-gap">gap: 12px between thumbs</div>
+      </div>
+      <div class="filter-scroll">
+        <div class="filter-thumb active filter-thumb--first">
+          <div class="filter-thumb-img ft-1">
+            <div class="inner">🌸</div>
+          </div>
+          <div class="filter-thumb-name">Bloom</div>
+          <div class="chip coral-chip chip-thumb-size">60×60px</div>
+        </div>
+        <div class="filter-thumb">
+          <div class="filter-thumb-img ft-2"><div class="inner">✨</div></div>
+          <div class="filter-thumb-name">Glow</div>
+        </div>
+        <div class="filter-thumb">
+          <div class="filter-thumb-img ft-3"><div class="inner">🌅</div></div>
+          <div class="filter-thumb-name">Sunset</div>
+        </div>
+        <div class="filter-thumb">
+          <div class="filter-thumb-img ft-4"><div class="inner">🌊</div></div>
+          <div class="filter-thumb-name">Aqua</div>
+        </div>
+        <div class="filter-thumb">
+          <div class="filter-thumb-img ft-5"><div class="inner">💜</div></div>
+          <div class="filter-thumb-name">Grape</div>
+        </div>
+        <div class="filter-thumb">
+          <div class="filter-thumb-img ft-6"><div class="inner">🧊</div></div>
+          <div class="filter-thumb-name">Ice</div>
+        </div>
+      </div>
+      <div class="scroll-hint">← scroll →</div>
+
+      <div class="spacer-20"></div>
+
+      <!-- Brightness Slider -->
+      <div class="slider-section ann">
+        <div class="slider-header">
+          <span>☀️ BRIGHTNESS</span>
+          <span class="value">65%</span>
+        </div>
+        <div class="slider-track ann">
+          <div class="slider-fill"></div>
+          <div class="slider-thumb"></div>
+          <div class="chip amber chip-slider-track">track: 6px tall · radius: pill</div>
+        </div>
+        <div class="chip mint chip-slider-thumb">thumb: 18×18px</div>
+      </div>
+
+      <div class="spacer-36"></div>
+
+      <!-- Shutter Row -->
+      <div class="shutter-row ann">
+        <div class="shutter-side-btn shutter-side-btn--annotated">
+          🖼️
+          <div class="chip chip-side-btn-size">40×40px</div>
+        </div>
+        <div class="shutter-btn ann">
+          <div class="shutter-btn-inner"></div>
+          <div class="chip coral-chip chip-shutter-size">72×72px</div>
+          <div class="chip chip-shutter-shadow">shadow: 0 4px 20px</div>
+        </div>
+        <div class="shutter-side-btn">⏱️</div>
+      </div>
+
+      <div class="spacer-16"></div>
+
+    </div>
+    <!-- /mockup-frame -->
+
+    <!-- SIDEBAR: chip key + quick sizes -->
+    <div>
+      <p class="chip-key-heading">Chip colour key</p>
+      <div class="chip-key chip-key--column">
+        <div class="chip-key-item"><div class="dot ink"></div> Dark — border-radius / structural</div>
+        <div class="chip-key-item"><div class="dot amber"></div> Amber — sizes &amp; dimensions</div>
+        <div class="chip-key-item"><div class="dot mint"></div> Mint — typography</div>
+        <div class="chip-key-item"><div class="dot lav"></div> Lavender — spacing / gaps</div>
+        <div class="chip-key-item"><div class="dot coral"></div> Coral — interactive / active state</div>
+      </div>
+
+      <div class="spacer-36"></div>
+
+      <div class="panel quick-sizes">
+        <p class="quick-sizes-title">Quick sizes at a glance</p>
+        <div class="quick-sizes-list">
+          <div class="spacing-item spacing-item--compact">
+            <span class="spacing-key">App max-width</span><span class="spacing-val">420px</span>
+          </div>
+          <div class="spacing-item spacing-item--compact">
+            <span class="spacing-key">App frame padding</span><span class="spacing-val">24px</span>
+          </div>
+          <div class="spacing-item spacing-item--compact">
+            <span class="spacing-key">Camera preview</span><span class="spacing-val">4/3 ratio</span>
+          </div>
+          <div class="spacing-item spacing-item--compact">
+            <span class="spacing-key">Filter thumb</span><span class="spacing-val">60×60px</span>
+          </div>
+          <div class="spacing-item spacing-item--compact">
+            <span class="spacing-key">Shutter button</span><span class="spacing-val">72×72px</span>
+          </div>
+          <div class="spacing-item spacing-item--compact">
+            <span class="spacing-key">Slider track height</span><span class="spacing-val">6px</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /mockup-wrap -->
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     SECTION 2 — COLORS
+════════════════════════════════════════ -->
+<section class="section">
+  <div class="section-title">02 — Colors</div>
+  <div class="panel">
+    <div class="swatches">
+
+      <div class="swatch-card">
+        <div class="swatch-color" style="background:#FF5C5C;"></div>
+        <div class="swatch-info">
+          <span class="swatch-hex">#FF5C5C</span>
+          <span class="swatch-role">Coral — Primary brand, shutter button, active states, accents</span>
+        </div>
+      </div>
+
+      <div class="swatch-card">
+        <div class="swatch-color" style="background:#FFB800;"></div>
+        <div class="swatch-info">
+          <span class="swatch-hex">#FFB800</span>
+          <span class="swatch-role">Amber — Brightness slider fill, value chips, energetic highlight</span>
+        </div>
+      </div>
+
+      <div class="swatch-card">
+        <div class="swatch-color" style="background:#3DDBA6;"></div>
+        <div class="swatch-info">
+          <span class="swatch-hex">#3DDBA6</span>
+          <span class="swatch-role">Mint — Success states, secondary highlights, positive feedback</span>
+        </div>
+      </div>
+
+      <div class="swatch-card">
+        <div class="swatch-color" style="background:#C9AAFF;"></div>
+        <div class="swatch-info">
+          <span class="swatch-hex">#C9AAFF</span>
+          <span class="swatch-role">Lavender — Tertiary accent, decorative pops, filter glow</span>
+        </div>
+      </div>
+
+      <div class="swatch-card">
+        <div class="swatch-color" style="background:#1A1A2E;"></div>
+        <div class="swatch-info">
+          <span class="swatch-hex">#1A1A2E</span>
+          <span class="swatch-role">Ink — All body text, labels, chip backgrounds</span>
+        </div>
+      </div>
+
+      <div class="swatch-card">
+        <div class="swatch-color swatch-color--white" style="background:#FFF8F0;"></div>
+        <div class="swatch-info">
+          <span class="swatch-hex">#FFF8F0</span>
+          <span class="swatch-role">Canvas — Page background, secondary bg areas</span>
+        </div>
+      </div>
+
+      <div class="swatch-card">
+        <div class="swatch-color swatch-color--white" style="background:#FFFFFF;"></div>
+        <div class="swatch-info">
+          <span class="swatch-hex">#FFFFFF</span>
+          <span class="swatch-role">White — App card bg, shutter inner ring, input surfaces</span>
+        </div>
+      </div>
+
+      <div class="swatch-card">
+        <div class="swatch-color" style="background:#E8DDD0;"></div>
+        <div class="swatch-info">
+          <span class="swatch-hex">#E8DDD0</span>
+          <span class="swatch-role">Rule — Dividers, borders, card outlines (1.5px)</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     SECTION 3 — TYPOGRAPHY
+════════════════════════════════════════ -->
+<section class="section">
+  <div class="section-title">03 — Typography · All Manrope</div>
+  <div class="panel">
+    <div class="type-rows">
+
+      <div class="type-row">
+        <div>
+          <div class="type-label">App Name / Logo</div>
+          <div class="spec-app-name">SnapBooth</div>
+        </div>
+        <div class="type-preview"></div>
+        <div class="type-size">24px</div>
+        <div class="type-weight">800</div>
+      </div>
+
+      <div class="type-row">
+        <div>
+          <div class="type-label">Section Heading</div>
+          <div class="spec-section-heading">My Filters</div>
+        </div>
+        <div class="type-preview"></div>
+        <div class="type-size">18px</div>
+        <div class="type-weight">800</div>
+      </div>
+
+      <div class="type-row">
+        <div>
+          <div class="type-label">Row Label (uppercase)</div>
+          <div class="spec-row-label">FILTERS · BRIGHTNESS</div>
+        </div>
+        <div class="type-preview"></div>
+        <div class="type-size">12px</div>
+        <div class="type-weight">700</div>
+      </div>
+
+      <div class="type-row">
+        <div>
+          <div class="type-label">Filter Thumbnail Name</div>
+          <div class="spec-thumb-name">Bloom · Glow · Sunset</div>
+        </div>
+        <div class="type-preview"></div>
+        <div class="type-size">10px</div>
+        <div class="type-weight">600</div>
+      </div>
+
+      <div class="type-row">
+        <div>
+          <div class="type-label">Slider Value Chip</div>
+          <div class="spec-value-chip">65%</div>
+        </div>
+        <div class="type-preview"></div>
+        <div class="type-size">12px</div>
+        <div class="type-weight">700</div>
+      </div>
+
+      <div class="type-row">
+        <div>
+          <div class="type-label">Body / Caption</div>
+          <div class="spec-body">Tap a filter to apply it live.</div>
+        </div>
+        <div class="type-preview"></div>
+        <div class="type-size">13px</div>
+        <div class="type-weight">500</div>
+      </div>
+
+      <div class="type-row">
+        <div>
+          <div class="type-label">Spec / Section Label (page)</div>
+          <div class="spec-section-label">01 — ANNOTATED MOCKUP</div>
+        </div>
+        <div class="type-preview"></div>
+        <div class="type-size">11px</div>
+        <div class="type-weight">700</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     SECTION 4 — SPACING & SIZES
+════════════════════════════════════════ -->
+<section class="section">
+  <div class="section-title">04 — Spacing &amp; Sizes</div>
+  <div class="panel">
+    <div class="spacing-grid">
+      <div class="spacing-item"><span class="spacing-key">App max-width</span><span class="spacing-val">420px</span></div>
+      <div class="spacing-item"><span class="spacing-key">App frame padding</span><span class="spacing-val">24px</span></div>
+      <div class="spacing-item"><span class="spacing-key">App card border-radius</span><span class="spacing-val">32px</span></div>
+      <div class="spacing-item"><span class="spacing-key">Header → Preview gap</span><span class="spacing-val">20px</span></div>
+      <div class="spacing-item"><span class="spacing-key">Preview border-radius</span><span class="spacing-val">16px</span></div>
+      <div class="spacing-item"><span class="spacing-key">Preview → Filter gap</span><span class="spacing-val">20px</span></div>
+      <div class="spacing-item"><span class="spacing-key">Filter thumb width</span><span class="spacing-val">60px</span></div>
+      <div class="spacing-item"><span class="spacing-key">Filter thumb height</span><span class="spacing-val">60px</span></div>
+      <div class="spacing-item"><span class="spacing-key">Filter thumb border-radius</span><span class="spacing-val">16px</span></div>
+      <div class="spacing-item"><span class="spacing-key">Gap between filter thumbs</span><span class="spacing-val">12px</span></div>
+      <div class="spacing-item"><span class="spacing-key">Active thumb outline</span><span class="spacing-val">2.5px</span></div>
+      <div class="spacing-item"><span class="spacing-key">Filter row → Slider gap</span><span class="spacing-val">24px</span></div>
+      <div class="spacing-item"><span class="spacing-key">Slider track height</span><span class="spacing-val">6px</span></div>
+      <div class="spacing-item"><span class="spacing-key">Slider thumb diameter</span><span class="spacing-val">18px</span></div>
+      <div class="spacing-item"><span class="spacing-key">Slider → Shutter gap</span><span class="spacing-val">36px</span></div>
+      <div class="spacing-item"><span class="spacing-key">Shutter button diameter</span><span class="spacing-val">72px</span></div>
+      <div class="spacing-item"><span class="spacing-key">Shutter inner ring inset</span><span class="spacing-val">4px</span></div>
+      <div class="spacing-item"><span class="spacing-key">Side icon button diameter</span><span class="spacing-val">40px</span></div>
+      <div class="spacing-item"><span class="spacing-key">Gap shutter ↔ side buttons</span><span class="spacing-val">20px</span></div>
+      <div class="spacing-item"><span class="spacing-key">Card / panel border</span><span class="spacing-val">1.5px</span></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     SECTION 5 — COMPONENT CARDS
+════════════════════════════════════════ -->
+<section class="section">
+  <div class="section-title">05 — Component-by-Component Breakdown</div>
+  <div class="comp-grid">
+
+    <!-- ── Camera Preview ── -->
+    <div class="comp-card">
+      <div class="comp-card-header comp-card-header--camera">
+        <div class="comp-icon comp-icon--camera">📷</div>
+        <div class="comp-name">Camera Preview</div>
+      </div>
+      <div class="comp-body">
+        <div class="comp-preview comp-preview--camera camera-preview ann">
+          <div class="camera-preview-inner">
+            <div class="camera-icon-sm comp-preview--camera">📷</div>
+            <div class="camera-label-sm comp-preview--camera">LIVE PREVIEW</div>
+          </div>
+          <div class="corner tl"></div><div class="corner tr"></div>
+          <div class="corner bl"></div><div class="corner br"></div>
+        </div>
+        <div class="comp-row"><span class="comp-k">Width</span><span class="comp-v">100% of parent</span></div>
+        <div class="comp-row"><span class="comp-k">Aspect ratio</span><span class="comp-v coral">4 / 3</span></div>
+        <div class="comp-row"><span class="comp-k">Border-radius</span><span class="comp-v">16px</span></div>
+        <div class="comp-row"><span class="comp-k">Background</span><span class="comp-v">gradient (dark)</span></div>
+        <div class="comp-row"><span class="comp-k">Border</span><span class="comp-v">none</span></div>
+        <div class="comp-row"><span class="comp-k">Overflow</span><span class="comp-v">hidden</span></div>
+        <div class="comp-row"><span class="comp-k">Corner guides</span><span class="comp-v">20×20px, 2px white</span></div>
+        <div class="comp-row"><span class="comp-k">Placeholder text color</span><span class="comp-v">rgba(255,255,255, 0.5)</span></div>
+        <div class="comp-row"><span class="comp-k">Placeholder font size</span><span class="comp-v">12px / 600</span></div>
+      </div>
+    </div>
+
+    <!-- ── Filter Row ── -->
+    <div class="comp-card">
+      <div class="comp-card-header comp-card-header--filter">
+        <div class="comp-icon comp-icon--filter">🎨</div>
+        <div class="comp-name">Filter Thumbnail Row</div>
+      </div>
+      <div class="comp-body">
+        <div class="comp-preview comp-preview--filter">
+          <div class="filter-mini-thumb ft-1 filter-mini-thumb--active">🌸</div>
+          <div class="filter-mini-thumb ft-2">✨</div>
+          <div class="filter-mini-thumb ft-3">🌅</div>
+          <div class="filter-mini-thumb ft-4">🌊</div>
+        </div>
+        <div class="comp-row"><span class="comp-k">Container display</span><span class="comp-v">flex, row</span></div>
+        <div class="comp-row"><span class="comp-k">overflow-x</span><span class="comp-v">auto (scroll)</span></div>
+        <div class="comp-row"><span class="comp-k">Gap between thumbs</span><span class="comp-v">12px</span></div>
+        <div class="comp-row"><span class="comp-k">Thumb width</span><span class="comp-v amber">60px</span></div>
+        <div class="comp-row"><span class="comp-k">Thumb height</span><span class="comp-v amber">60px</span></div>
+        <div class="comp-row"><span class="comp-k">Thumb border-radius</span><span class="comp-v">16px</span></div>
+        <div class="comp-row"><span class="comp-k">Thumb background</span><span class="comp-v">gradient (per filter)</span></div>
+        <div class="comp-row"><span class="comp-k">Active outline</span><span class="comp-v coral">2.5px solid #FF5C5C</span></div>
+        <div class="comp-row"><span class="comp-k">Active outline-offset</span><span class="comp-v coral">1px</span></div>
+        <div class="comp-row"><span class="comp-k">Name text</span><span class="comp-v">10px / 600 / centered</span></div>
+        <div class="comp-row"><span class="comp-k">Name color (default)</span><span class="comp-v">#1A1A2E at 60% opacity</span></div>
+        <div class="comp-row"><span class="comp-k">Name color (active)</span><span class="comp-v coral">#FF5C5C</span></div>
+      </div>
+    </div>
+
+    <!-- ── Brightness Slider ── -->
+    <div class="comp-card">
+      <div class="comp-card-header comp-card-header--slider">
+        <div class="comp-icon comp-icon--slider">☀️</div>
+        <div class="comp-name">Brightness Slider</div>
+      </div>
+      <div class="comp-body">
+        <div class="comp-preview comp-preview--slider">
+          <div class="slider-mini-header">
+            <span class="slider-mini-label">☀️ BRIGHTNESS</span>
+            <span class="slider-mini-value">65%</span>
+          </div>
+          <div class="slider-mini-track">
+            <div class="slider-mini-fill"></div>
+            <div class="slider-mini-thumb"></div>
+          </div>
+        </div>
+        <div class="comp-row"><span class="comp-k">Track width</span><span class="comp-v">100% of parent</span></div>
+        <div class="comp-row"><span class="comp-k">Track height</span><span class="comp-v amber">6px</span></div>
+        <div class="comp-row"><span class="comp-k">Track background</span><span class="comp-v">#FFF8F0 (canvas)</span></div>
+        <div class="comp-row"><span class="comp-k">Track border-radius</span><span class="comp-v">999px (pill)</span></div>
+        <div class="comp-row"><span class="comp-k">Fill gradient</span><span class="comp-v amber">#FFB800 → #FF5C5C</span></div>
+        <div class="comp-row"><span class="comp-k">Thumb diameter</span><span class="comp-v amber">18px</span></div>
+        <div class="comp-row"><span class="comp-k">Thumb background</span><span class="comp-v">#FFFFFF</span></div>
+        <div class="comp-row"><span class="comp-k">Thumb border</span><span class="comp-v amber">2.5px solid #FFB800</span></div>
+        <div class="comp-row"><span class="comp-k">Thumb box-shadow</span><span class="comp-v">0 2px 6px #FFB80040</span></div>
+        <div class="comp-row"><span class="comp-k">Value chip font</span><span class="comp-v">12px / 700</span></div>
+        <div class="comp-row"><span class="comp-k">Value chip color</span><span class="comp-v amber">#A07000</span></div>
+        <div class="comp-row"><span class="comp-k">Value chip bg</span><span class="comp-v">#FFF8E7</span></div>
+        <div class="comp-row"><span class="comp-k">Value chip padding</span><span class="comp-v">2px 8px</span></div>
+        <div class="comp-row"><span class="comp-k">Value chip border-radius</span><span class="comp-v">999px</span></div>
+      </div>
+    </div>
+
+    <!-- ── Shutter Button ── -->
+    <div class="comp-card">
+      <div class="comp-card-header comp-card-header--shutter">
+        <div class="comp-icon comp-icon--shutter">📸</div>
+        <div class="comp-name">Shutter Snap Button</div>
+      </div>
+      <div class="comp-body">
+        <div class="comp-preview comp-preview--shutter">
+          <div class="shutter-mini-side">🖼️</div>
+          <div class="shutter-mini-btn">
+            <div class="shutter-mini-ring"></div>
+            <div class="shutter-mini-inner"></div>
+          </div>
+          <div class="shutter-mini-side">⏱️</div>
+        </div>
+        <div class="comp-sub-label coral">Shutter (main)</div>
+        <div class="comp-row"><span class="comp-k">Diameter</span><span class="comp-v coral">72px</span></div>
+        <div class="comp-row"><span class="comp-k">Border-radius</span><span class="comp-v">50% (circle)</span></div>
+        <div class="comp-row"><span class="comp-k">Background</span><span class="comp-v coral">#FF5C5C</span></div>
+        <div class="comp-row"><span class="comp-k">Box-shadow</span><span class="comp-v coral">0 4px 20px #FF5C5C55</span></div>
+        <div class="comp-row"><span class="comp-k">Inner ring inset</span><span class="comp-v">4px from edge</span></div>
+        <div class="comp-row"><span class="comp-k">Inner ring border</span><span class="comp-v">2.5px, white 50% opacity</span></div>
+        <div class="comp-row"><span class="comp-k">Inner fill opacity</span><span class="comp-v">0.25 (white)</span></div>
+        <div class="spacer-12"></div>
+        <div class="comp-sub-label muted">Side Icon Buttons</div>
+        <div class="comp-row"><span class="comp-k">Diameter</span><span class="comp-v">40px</span></div>
+        <div class="comp-row"><span class="comp-k">Border-radius</span><span class="comp-v">50% (circle)</span></div>
+        <div class="comp-row"><span class="comp-k">Background</span><span class="comp-v">#FFF8F0 (canvas)</span></div>
+        <div class="comp-row"><span class="comp-k">Border</span><span class="comp-v">none</span></div>
+        <div class="comp-row"><span class="comp-k">Icon size</span><span class="comp-v">18px emoji</span></div>
+        <div class="comp-row"><span class="comp-k">Gap (side → shutter)</span><span class="comp-v">20px</span></div>
+        <div class="comp-row"><span class="comp-k">Row alignment</span><span class="comp-v">center / center</span></div>
+      </div>
+    </div>
+
+  </div><!-- /comp-grid -->
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     FOOTER
+════════════════════════════════════════ -->
+<footer class="footer">
+  <p>📸 SnapBooth — Design Spec Sheet · Static only · No JS</p>
+  <p>Font: <strong>Manrope</strong> · Base color: <strong>#1A1A2E</strong> · Canvas: <strong>#FFF8F0</strong></p>
+</footer>
+
+</body>
+</html>

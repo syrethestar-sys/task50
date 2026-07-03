@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>📸 SnapBooth — Design Spec Sheet</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="photobooth-spec.css" />
+  </head>
+  <!-- ═══════════════════════════════════════
+     SECTION 1 — ANNOTATED MOCKUP
+════════════════════════════════════════ -->
+<section class="section">
+
+  <div class="mockup-wrap">
+
+    <!-- MOCKUP FRAME -->
+    <div class="mockup-frame">
+
+      <!-- App Header -->
+      <div class="app-header ann">
+        <div class="app-logo">Snap<span>Booth</span></div>
+        <div class="app-header-icons">
+          <div class="icon-btn">🔄</div>
+          <div class="icon-btn">⚙️</div>
+        </div>
+      </div>
+
+      <div class="spacer-28"></div>
+
+      <!-- Camera Preview -->
+      <div class="camera-preview ann">
+        <video id="webcam" autoplay playsinline></video>
+        <div class="corner tl"></div>
+        <div class="corner tr"></div>
+        <div class="corner bl"></div>
+        <div class="corner br"></div>
+      </div>
+
+      <!-- Filter Row -->
+      <div class="filter-label-row ann">
+        <span>FILTERS</span>
+        <a>See all →</a>
+      </div>
+      <div class="filter-scroll">
+        <div class="filter-thumb active filter-thumb--first">
+          <div class="filter-thumb-img ft-1">
+            <div class="inner">🌸</div>
+          </div>
+          <div class="filter-thumb-name">Bloom</div>
+          <div class="chip coral-chip chip-thumb-size">60×60px</div>
+        </div>
+        <div class="filter-thumb">
+          <div class="filter-thumb-img ft-2"><div class="inner">✨</div></div>
+          <div class="filter-thumb-name">Glow</div>
+        </div>
+        <div class="filter-thumb">
+          <div class="filter-thumb-img ft-3"><div class="inner">🌅</div></div>
+          <div class="filter-thumb-name">Sunset</div>
+        </div>
+        <div class="filter-thumb">
+          <div class="filter-thumb-img ft-4"><div class="inner">🌊</div></div>
+          <div class="filter-thumb-name">Aqua</div>
+        </div>
+        <div class="filter-thumb">
+          <div class="filter-thumb-img ft-5"><div class="inner">💜</div></div>
+          <div class="filter-thumb-name">Grape</div>
+        </div>
+        <div class="filter-thumb">
+          <div class="filter-thumb-img ft-6"><div class="inner">🧊</div></div>
+          <div class="filter-thumb-name">Ice</div>
+        </div>
+      </div>
+      <div class="scroll-hint">← scroll →</div>
+
+      <div class="spacer-20"></div>
+
+      <!-- Brightness Slider -->
+      <div class="slider-section ann">
+        <div class="slider-header">
+          <span>☀️ BRIGHTNESS</span>
+          <span class="value">65%</span>
+        </div>
+        <div class="slider-track ann">
+          <div class="slider-fill"></div>
+          <div class="slider-thumb"></div>
+        </div>
+      </div>
+
+      <div class="spacer-36"></div>
+
+      <!-- Shutter Row -->
+      <div class="shutter-row ann">
+        <div class="shutter-side-btn shutter-side-btn--annotated">
+          🖼️
+        </div>
+        <div class="shutter-btn ann">
+          <div class="shutter-btn-inner"></div>
+        </div>
+        <div class="shutter-side-btn">⏱️</div>
+      </div>
+
+      <div class="spacer-16"></div>
+
+    </div>
+  <body>
+<script src="./index.js"></script>
+  </body>
+</html>
