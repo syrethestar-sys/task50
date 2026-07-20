@@ -48,26 +48,26 @@
       <div class="filter-scroll">
         <div class="filter-thumb active filter-thumb--first">
           <div class="filter-thumb-img ft-1">
-            <div class="inner">🌸</div>
+            <div class="inner">🔳</div>
           </div>
-          <div class="filter-thumb-name">Bloom</div>
+          <div class="filter-thumb-name">Grayscale</div>
           <div class="chip coral-chip chip-thumb-size">60×60px</div>
         </div>
         <div class="filter-thumb">
-          <div class="filter-thumb-img ft-2"><div class="inner">✨</div></div>
-          <div class="filter-thumb-name">Glow</div>
+          <div class="filter-thumb-img ft-2"><div class="inner">📜</div></div>
+          <div class="filter-thumb-name">Sepia</div>
         </div>
         <div class="filter-thumb">
-          <div class="filter-thumb-img ft-3"><div class="inner">🌅</div></div>
-          <div class="filter-thumb-name">Sunset</div>
+          <div class="filter-thumb-img ft-3"><div class="inner">🌫️</div></div>
+          <div class="filter-thumb-name">Blur</div>
         </div>
         <div class="filter-thumb">
-          <div class="filter-thumb-img ft-4"><div class="inner">🌊</div></div>
-          <div class="filter-thumb-name">Aqua</div>
+          <div class="filter-thumb-img ft-4"><div class="inner">🙃</div></div>
+          <div class="filter-thumb-name">Invert</div>
         </div>
         <div class="filter-thumb">
           <div class="filter-thumb-img ft-5"><div class="inner">💜</div></div>
-          <div class="filter-thumb-name">Grape</div>
+          <div class="filter-thumb-name">Night vision</div>
         </div>
         <div class="filter-thumb">
           <div class="filter-thumb-img ft-6"><div class="inner">🧊</div></div>
@@ -82,9 +82,11 @@
       <div class="slider-section ann">
         <div class="slider-header">
           <span>☀️ BRIGHTNESS</span>
-          <span class="value">65%</span>
+          <span class="value" id="brightness-value">65%</span> 
         </div>
         <div class="slider-track ann">
+          <input type="range" id="brightness-slider" min="0" max="100" value="65">
+          
           <div class="slider-fill"></div>
           <div class="slider-thumb"></div>
         </div>
