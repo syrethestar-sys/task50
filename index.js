@@ -1,33 +1,30 @@
-// CAM LIVE
+// WEBCAM INITIALIZATION
 const videoElement = document.getElementById("webcam");
 
 async function initWebcam() {
   try {
     const stream = await navigator.mediaDevices.getUserMedia({
-      video: true,
+      video: { width: { ideal: 1280 }, height: { ideal: 720 } },
       audio: false,
     });
-
     videoElement.srcObject = stream;
   } catch (error) {
-    console.error("Камер холбоход алдаа гарлаа:", error);
-    alert("Аппыг ажиллуулахын тулд камерын зөвшөөрөл олгоно уу!");
+    console.error("Camera access error:", error);
+    alert("Please allow camera access to use SnapBooth!");
   }
 }
 window.addEventListener("DOMContentLoaded", initWebcam);
 
-const image = document.getElementById("webcam");
-
-//FILTER
+// FILTER & BRIGHTNESS CONTROLS
+const image = videoElement;
 const slider = document.getElementById("brightness-slider");
 const valueText = document.getElementById("brightness-value");
 const fill = document.querySelector(".slider-fill");
 const thumb = document.querySelector(".slider-thumb");
-
 const filterButtons = document.querySelectorAll(".filter-scroll .filter-thumb");
 
 const activeFilters = {
-  brightness: 1,
+  brightness: 0.5,
   grayscale: false,
   sepia: false,
   blur: false,
@@ -35,7 +32,7 @@ const activeFilters = {
   nightVision: false,
   ice: false,
 };
-//WHICH FILTER
+
 function applyAllFilters() {
   let filterString = `brightness(${activeFilters.brightness})`;
 
@@ -43,30 +40,28 @@ function applyAllFilters() {
   if (activeFilters.sepia) filterString += " sepia(80%)";
   if (activeFilters.blur) filterString += " blur(2px)";
   if (activeFilters.invert) filterString += " invert(1)";
-
   if (activeFilters.nightVision)
     filterString +=
       " hue-rotate(90deg) saturate(300%) contrast(120%) brightness(0.8) sepia(100%) hue-rotate(50deg)";
-
   if (activeFilters.ice)
     filterString += " hue-rotate(180deg) saturate(150%) contrast(110%)";
 
   image.style.filter = filterString;
 }
 
-// SLIDER CONTROL
+// Slider Control
 function updateSlider() {
   const value = slider.value;
   valueText.textContent = `${value}%`;
   fill.style.width = `${value}%`;
   thumb.style.left = `${value}%`;
 
-  activeFilters.brightness = value / 100;
+  activeFilters.brightness = value / 70;
   applyAllFilters();
 }
 slider.addEventListener("input", updateSlider);
 
-// BUTTON CONTROL
+// Filter Button
 filterButtons.forEach((button) => {
   button.addEventListener("click", () => {
     button.classList.toggle("active");
@@ -88,48 +83,77 @@ filterButtons.forEach((button) => {
   });
 });
 updateSlider();
-// //Filter grayscale
-// const button = document.querySelector(".filter-thumb");
 
-// button.addEventListener("click", () => {
-//   button.classList.toggle("active");
-//   if (button.classList.contains("active")) {
-//     image.style.filter =
-//       "grayscale(100%) blur(0.5px) brightness(100%) sepia(80%) hue-rotate(90deg)";
-//   } else {
-//     image.style.filter = "none";
-//   }
-// });
-
-// //SLIDER
-// const slider = document.getElementById("brightness-slider");
-// const valueText = document.getElementById("brightness-value");
-// const fill = document.querySelector(".slider-fill");
-// const thumb = document.querySelector(".slider-thumb");
-
-// function updateSlider() {
-//   const value = slider.value;
-
-//   valueText.textContent = `${value}%`;
-
-//   fill.style.width = `${value}%`;
-
-//   thumb.style.left = `${value}%`;
-//   const brightnessValue = 0.3 + (value / 100) * 0.9;
-//   image.style.filter = `brightness(${brightnessValue})`;
-// }
-
-// slider.addEventListener("input", updateSlider);
-
-// updateSlider();
-//MIRROR BUTTON
+// MIRROR TOGGLE
 const mirrorButton = document.querySelector(".icon-btn");
 
 mirrorButton.addEventListener("click", () => {
   mirrorButton.classList.toggle("active");
   if (mirrorButton.classList.contains("active")) {
-    image.style.transform = "scaleX(-1)";
+    image.style.transform = "scaleX(1)"; // Unmirror if active
   } else {
-    image.style.transform = "scaleX(1)";
+    image.style.transform = "scaleX(-1)"; // Mirrored by default
   }
+});
+
+// SHUTTER CAPTURE
+const photoBtn = document.getElementById("shutter");
+const canvas = document.getElementById("canvas");
+const photosContainer = document.getElementById("photos");
+const galleryToggleBtn = document.getElementById("gallery"); // outer icon button
+const closePhotosBtn = document.getElementById("close-photos");
+
+photoBtn.addEventListener("click", function () {
+  if (!canvas) return;
+
+  canvas.width = videoElement.videoWidth || 640;
+  canvas.height = videoElement.videoHeight || 480;
+
+  const photoCtx = canvas.getContext("2d");
+  photoCtx.save();
+
+  const isFlipped =
+    image.style.transform === "scaleX(-1)" || image.style.transform === "";
+  if (isFlipped) {
+    photoCtx.translate(canvas.width, 0);
+    photoCtx.scale(-1, 1);
+  }
+  photoCtx.filter = image.style.filter || "none";
+
+  photoCtx.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
+  photoCtx.restore();
+
+  // Generate the actual image data URL from the canvas (was missing before)
+  const imageDataUrl = canvas.toDataURL("image/png");
+
+  // Wrap each photo + its download button together
+  const photoCard = document.createElement("div");
+  photoCard.classList.add("gallery-card");
+
+  const newImg = document.createElement("img");
+  newImg.src = imageDataUrl;
+  newImg.alt = "Captured Photo";
+  newImg.classList.add("gallery-thumb");
+
+  const downloadBtn = document.createElement("a");
+  downloadBtn.classList.add("download-btn");
+  downloadBtn.href = imageDataUrl;
+  downloadBtn.download = `snapbooth-${Date.now()}.png`;
+  downloadBtn.textContent = "⬇ Download";
+
+  photoCard.appendChild(newImg);
+  photoCard.appendChild(downloadBtn);
+  photosContainer.appendChild(photoCard);
+});
+
+// GALLERY OPEN/CLOSE
+// (renamed to avoid re-declaring the same variable name twice)
+galleryToggleBtn.addEventListener("click", function (e) {
+  if (e.target.closest("#photos")) return;
+  photosContainer.classList.add("active");
+});
+
+closePhotosBtn.addEventListener("click", function (e) {
+  e.stopPropagation();
+  photosContainer.classList.remove("active");
 });
