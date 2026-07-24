@@ -1,6 +1,7 @@
 // The 20-minute core (MVP)
 // Live webcam preview on the page
-// A row of filter buttons (grayscale, sepia, blur, invert, etc.) that instantly change how the preview looks
+// A row of filter buttons (grayscale, sepia, blur, invert, etc.)
+// that instantly change how the preview looks
 // At least one slider (e.g. brightness) for an adjustable filter
 // A "snap" button that saves the current filtered frame as an image
 
@@ -15,7 +16,7 @@ navigator.mediaDevices
     console.log("No camera access dumbass");
   });
 
-//filter
+//
 const normal = document.getElementById("normal");
 const grayscale = document.getElementById("grayscale");
 const sepia = document.getElementById("sepia");
@@ -45,9 +46,9 @@ invert.addEventListener("click", function () {
   currentFilter = "invert(100%)";
   applyFilter();
 });
-blur.addEventListener("click", function () {
-  currentFilter = "blur(2px)";
-  applyFilter();
+blur.addEventListener("click", function () {//* *//
+
+
 });
 
 //slider
@@ -56,13 +57,13 @@ slider.addEventListener("input", function () {
 });
 
 //applying filter
-function applyFilter() {
-  const brightnessValue = slider.value;
-  if (currentFilter === "none") {
-    videoElement.style.filter = `brightness(${brightnessValue}%)`;
-  } else {
-    videoElement.style.filter = `${currentFilter} brightness(${brightnessValue}%)`;
-  }
+function applyFilter() {//* *//
+  
+
+
+
+
+
   // ` ашиглах үед $ {},"Энэ дотор байгаа зүйлийг энгийн текст биш,
   // JavaScript-ийн код/хувьсагч гэж ойлгоод УТГЫГ НЬ ГАРГАЖ ИРЭЭРЭЙ!"
 
@@ -75,17 +76,13 @@ function applyFilter() {
 }
 
 //Snap button & Saved photos
-snap.addEventListener("click", function () {
-  const photo = canvas.getContext("2d");
+snap.addEventListener("click", function () { //* *//
+  
 
-  canvas.width = videoElement.videoWidth;
-  canvas.height = videoElement.videoHeight;
 
-  photo.filter = videoElement.style.filter || "none";
-  photo.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
-  const dataURL = canvas.toDataURL("image/png");
 
-  const newImg = document.createElement("img");
-  newImg.src = dataURL;
-  gallery.appendChild(newImg);
+
+
+
+
 });
